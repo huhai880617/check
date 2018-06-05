@@ -12,6 +12,6 @@ namespace check
         public static string warehouseCode { get; set; }
         public static string warehouseName { get; set;}
         public static DateTime loginTime { get; set; }
-
+        public static string server { get; set; }
     }
 }

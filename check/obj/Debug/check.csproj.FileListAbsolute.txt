@@ -1,0 +1,55 @@
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\check.exe.config
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\check.exe
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\check.pdb
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\EntityFramework.dll
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\EntityFramework.SqlServer.dll
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\Google.Protobuf.dll
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\MySql.Data.dll
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\MySql.Data.Entity.EF6.dll
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\EntityFramework.xml
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\EntityFramework.SqlServer.xml
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\Google.Protobuf.xml
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\MySql.Data.xml
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\bin\Debug\MySql.Data.Entity.EF6.xml
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.csprojResolveAssemblyReference.cache
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.Properties.Resources.resources
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.csproj.GenerateResource.Cache
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.exe
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.pdb
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.Form1.resources
+d:\mydata\huhai2.cn\documents\visual studio 2015\Projects\check\check\obj\Debug\check.frmLogincs.resources
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\ANNTO-WORKBENCH.exe.config
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\ANNTO-WORKBENCH.exe
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\ANNTO-WORKBENCH.pdb
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.MySql.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.MySql.Vs.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\EntityFramework.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\EntityFramework.SqlServer.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Google.Protobuf.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\MySql.Data.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\MySql.Data.Entity.EF6.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Newtonsoft.Json.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.Design.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\EnvDTE.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.MySql.Design.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\VSLangProj.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\VsWebSite.Interop.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\stdole.dll
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Devart.Data.MySql.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\EntityFramework.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\EntityFramework.SqlServer.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Google.Protobuf.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\MySql.Data.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\MySql.Data.Entity.EF6.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\bin\Debug\Newtonsoft.Json.xml
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.csproj.ANNTO-WORKBENCH.exe.config
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.frmMain.resources
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.frmLogincs.resources
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.Properties.Resources.resources
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.csproj.GenerateResource.Cache
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\ANNTO-WORKBENCH.exe
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\ANNTO-WORKBENCH.pdb
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.frmSetting.resources
+E:\HH\File\PROJECT\Csharp_WorkBench\Wmscheck\check\check\obj\Debug\check.csprojResolveAssemblyReference.cache
