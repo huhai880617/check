@@ -82,6 +82,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receiptCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -327,11 +333,12 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox1.Location = new System.Drawing.Point(835, 4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(409, 187);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "测试文本";
             // 
             // panel4
             // 
@@ -389,7 +396,7 @@
             this.lblRemainNum.AutoSize = true;
             this.lblRemainNum.Font = new System.Drawing.Font("宋体", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRemainNum.ForeColor = System.Drawing.Color.MediumBlue;
-            this.lblRemainNum.Location = new System.Drawing.Point(540, 25);
+            this.lblRemainNum.Location = new System.Drawing.Point(533, 25);
             this.lblRemainNum.Name = "lblRemainNum";
             this.lblRemainNum.Size = new System.Drawing.Size(127, 64);
             this.lblRemainNum.TabIndex = 22;
@@ -399,7 +406,7 @@
             // 
             this.cbxOrderReason.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxOrderReason.FormattingEnabled = true;
-            this.cbxOrderReason.Location = new System.Drawing.Point(573, 127);
+            this.cbxOrderReason.Location = new System.Drawing.Point(582, 140);
             this.cbxOrderReason.Name = "cbxOrderReason";
             this.cbxOrderReason.Size = new System.Drawing.Size(225, 29);
             this.cbxOrderReason.TabIndex = 7;
@@ -409,7 +416,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(698, 69);
+            this.label11.Location = new System.Drawing.Point(701, 69);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(52, 12);
             this.label11.TabIndex = 17;
@@ -419,7 +426,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(693, 21);
+            this.label10.Location = new System.Drawing.Point(697, 21);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(57, 12);
             this.label10.TabIndex = 16;
@@ -428,7 +435,7 @@
             // btnCloseOrder
             // 
             this.btnCloseOrder.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCloseOrder.Location = new System.Drawing.Point(447, 128);
+            this.btnCloseOrder.Location = new System.Drawing.Point(444, 128);
             this.btnCloseOrder.Name = "btnCloseOrder";
             this.btnCloseOrder.Size = new System.Drawing.Size(87, 49);
             this.btnCloseOrder.TabIndex = 15;
@@ -440,7 +447,7 @@
             // 
             this.btnCloseContainer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCloseContainer.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCloseContainer.Location = new System.Drawing.Point(355, 128);
+            this.btnCloseContainer.Location = new System.Drawing.Point(350, 128);
             this.btnCloseContainer.Name = "btnCloseContainer";
             this.btnCloseContainer.Size = new System.Drawing.Size(86, 49);
             this.btnCloseContainer.TabIndex = 5;
@@ -454,7 +461,7 @@
             this.rdoWay.Controls.Add(this.rdoBatch);
             this.rdoWay.Controls.Add(this.rdoMix);
             this.rdoWay.Controls.Add(this.rdoEach);
-            this.rdoWay.Location = new System.Drawing.Point(355, 12);
+            this.rdoWay.Location = new System.Drawing.Point(351, 12);
             this.rdoWay.Name = "rdoWay";
             this.rdoWay.Size = new System.Drawing.Size(179, 110);
             this.rdoWay.TabIndex = 14;
@@ -533,7 +540,7 @@
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(171, 26);
             this.txtBarcode.TabIndex = 4;
-            this.txtBarcode.Text = "0123345679";
+            this.txtBarcode.Text = "9787020083497";
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
             // 
             // label8
@@ -553,7 +560,7 @@
             this.txtLpn.Name = "txtLpn";
             this.txtLpn.Size = new System.Drawing.Size(229, 26);
             this.txtLpn.TabIndex = 3;
-            this.txtLpn.Text = "0123345679";
+            this.txtLpn.Text = "2110010010202";
             this.txtLpn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
             // 
             // label7
@@ -573,7 +580,7 @@
             this.txtOrder.Name = "txtOrder";
             this.txtOrder.Size = new System.Drawing.Size(229, 26);
             this.txtOrder.TabIndex = 2;
-            this.txtOrder.Text = "0123345679";
+            this.txtOrder.Text = "AD201806060001";
             this.txtOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
             // 
             // label6
@@ -619,10 +626,17 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 27);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.receiptCode,
+            this.itemCode,
+            this.itemName,
+            this.totalQty,
+            this.openQty});
+            this.dataGridView1.Location = new System.Drawing.Point(3, 25);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(517, 458);
+            this.dataGridView1.Size = new System.Drawing.Size(517, 454);
             this.dataGridView1.TabIndex = 4;
             // 
             // label12
@@ -737,6 +751,41 @@
             this.label13.Text = "已收";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "序号";
+            this.ID.Name = "ID";
+            this.ID.Width = 40;
+            // 
+            // receiptCode
+            // 
+            this.receiptCode.HeaderText = "单号";
+            this.receiptCode.Name = "receiptCode";
+            this.receiptCode.Width = 80;
+            // 
+            // itemCode
+            // 
+            this.itemCode.HeaderText = "商品编码";
+            this.itemCode.Name = "itemCode";
+            this.itemCode.Width = 80;
+            // 
+            // itemName
+            // 
+            this.itemName.HeaderText = "商品名称";
+            this.itemName.Name = "itemName";
+            // 
+            // totalQty
+            // 
+            this.totalQty.HeaderText = "总数量";
+            this.totalQty.Name = "totalQty";
+            this.totalQty.Width = 70;
+            // 
+            // openQty
+            // 
+            this.openQty.HeaderText = "待收数量";
+            this.openQty.Name = "openQty";
+            this.openQty.Width = 80;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -830,6 +879,12 @@
         private System.Windows.Forms.Label lblSKUCount;
         private System.Windows.Forms.Label lblCountNum;
         private System.Windows.Forms.Label lblRemainNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receiptCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn openQty;
     }
 }
 

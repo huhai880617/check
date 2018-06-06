@@ -38,6 +38,8 @@ namespace check
                // XmlDocument doc = new XmlDocument();
                 string s = streamReader.ReadToEnd();
                 streamReader.Close();
+                request.Abort();
+                response.Close();
                 // doc.LoadXml(s);
                 //  Rstring = JsonConvert.SerializeXmlNode(doc);
                 Rstring = s;
@@ -89,17 +91,49 @@ namespace check
                 }
             }
 
-            WebResponse response = (WebResponse)request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             //  Stream myResponseStream = response.GetResponseStream();
             streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(streamReader.ReadToEnd());
-            string str = JsonConvert.SerializeXmlNode(doc);
-            Rstring = JsonConvert.SerializeXmlNode(doc);
+           
+            Rstring = streamReader.ReadToEnd();
+            streamReader.Close();
+            request.Abort();
+            response.Close();
             return Rstring;
         }
 
-      
+        //body是要传递的参数,格式"roleId=1&uid=2"
+        //post的cotentType填写:
+        //"application/x-www-form-urlencoded"
+        //soap填写:"text/xml; charset=utf-8"
+        public static string postReturnJson(string url, string body)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            httpWebRequest.ContentType = "application/json" ;
+            httpWebRequest.Method = "POST";
+           // httpWebRequest.Timeout = 20000;
+            WarehouseCode warehousecode = new WarehouseCode(warehouse);
+            httpWebRequest.Headers.Add("X-User", user);
+            httpWebRequest.Headers.Add("X-DB", db);
+            httpWebRequest.Headers.Add("x-params", JsonToolEx.ToJson(warehousecode));
+
+            byte[] btBodys = Encoding.UTF8.GetBytes(body);
+            httpWebRequest.ContentLength = btBodys.Length;
+            httpWebRequest.GetRequestStream().Write(btBodys, 0, btBodys.Length);
+
+            HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream());
+            string responseContent = streamReader.ReadToEnd();
+
+            httpWebResponse.Close();
+            streamReader.Close();
+            httpWebRequest.Abort();
+            httpWebResponse.Close();
+
+            return responseContent;
+        }
+
         private class WarehouseCode
         {
             private string _warehouse;

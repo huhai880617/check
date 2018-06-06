@@ -15,7 +15,7 @@ namespace check
     {
         private ResponseWarehouseEntity rsm;
         private ConfigSetting cfg;
-        public string controllApi = @"/rf/login/warehouse";
+       // public string controllApi = @"/rf/login/warehouse";
         public frmLogincs()
         {
             InitializeComponent();
@@ -26,9 +26,9 @@ namespace check
             string file = Path.Combine(Application.StartupPath, "config\\config.ini");
             cfg = new ConfigSetting(file);
             txtUser.Text = cfg.User;
-            string url = cfg.Server + controllApi;
-            string str= TTX_WebAPI_Helper.getReturnJson(url);
-            ResponseWarehouseEntity rsp = JsonToolEx.ToObject<ResponseWarehouseEntity>(str.Replace("default", "flag"));
+            //string url = cfg.Server + controllApi;
+            loginAPI login = new loginAPI(cfg.Server);
+            ResponseWarehouseEntity rsp = login.logInWarehouse("warehouse");
             if (rsp != null && rsp.data != null)
             {
                 rsm = rsp;

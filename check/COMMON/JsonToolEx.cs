@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -37,6 +38,26 @@ namespace check
             return JsonConvert.DeserializeObject<T>(json);
 
         }
+
+        //public static DataTable toDataTable(string[] columns, string json)
+        //{
+        //    DataTable dataTable = new DataTable();
+        //    DataTable result;
+        //    try
+        //    {
+        //        foreach (string s in columns)
+        //        {
+        //            dataTable.Columns.Add(s);
+        //        }
+                
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogExecute.WriteExceptionLog("toDataTable",ex);
+        //    }
+        //    result = dataTable;
+        //    return result;
+        //}
 
     }
 }

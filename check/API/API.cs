@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace check
 {
-    public class ResponseEntity
+    public class API
     {
-        public string code;
-        public string msg;
-        public string notify;
-        public string error;
+        public string server;
+        public string controllerName;
+        public string methodName;
     }
 }

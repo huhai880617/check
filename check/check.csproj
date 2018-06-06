@@ -116,11 +116,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\API.cs" />
+    <Compile Include="API\receiptAPI.cs" />
+    <Compile Include="API\loginAPI.cs" />
     <Compile Include="COMMON\CEncoder.cs" />
     <Compile Include="COMMON\MConfigSetting.cs" />
     <Compile Include="COMMON\DBConnect.cs" />
     <Compile Include="COMMON\Computer.cs" />
     <Compile Include="COMMON\LogExecute.cs" />
+    <Compile Include="RequestInfo\ReceiptConfirmRequest.cs" />
     <Compile Include="ResponseInfo\ResponseEntity.cs" />
     <Compile Include="COMMON\TTX_WebAPI_Helper.cs" />
     <Compile Include="COMMON\ConfigSetting.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="COMMON\WebAPIHelper.cs" />
+    <Compile Include="ResponseInfo\ResponseMessage.cs" />
     <Compile Include="ResponseInfo\ResponseReceiptEntity.cs" />
     <Compile Include="ResponseInfo\ResponseWarehouseEntity.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -212,6 +217,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
