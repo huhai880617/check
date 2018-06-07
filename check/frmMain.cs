@@ -54,12 +54,18 @@ namespace check
 
         private void btnCloseOrder_Click(object sender, EventArgs e)
         {
-
+            receiptAPI api = new receiptAPI(loginUser.server);
+            if (responseReceiptInfo != null) {
+                ResponseEntity rsp = api.closeReceipt("receipt/closeReceipt", responseReceiptInfo.id);
+                if (rsp != null && rsp.code == "0") {
+                    Msg.ShowInformation(string.Format("订单{0}关闭成功！！！",responseReceiptInfo.receiptCode));
+                }
+            }
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-
+            txtCarNo.Enabled = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -102,8 +108,11 @@ namespace check
                     {
                         case "txtCarNo":
                             {
-                                textbox.Enabled = false;
-                                txtOrder.Focus();
+                                if (getCarInfo(textbox.Text.Trim()) == true)
+                                {
+                                    textbox.Enabled = false;
+                                    txtOrder.Focus();
+                                }
                                 break;
                             }
                         case "txtOrder":
@@ -132,6 +141,7 @@ namespace check
                             {
                                // txtBarcodeCount.Text = "1";
                                 confirm();
+                                FillContainerDataGridView(txtOrder.Text.Trim());
                                 break;
                             }
                         case "txtSN":
@@ -151,6 +161,7 @@ namespace check
         private string prefCode = "Recinputeach";
         private string inventorySts = "Y";
         private ResponseReceiptInfo responseReceiptInfo;
+       
         /// <summary>
         /// 查询获取订单信息
         /// </summary>
@@ -173,6 +184,7 @@ namespace check
 
                 responseReceiptInfo = rsp.data;
                 FillReciptDataGridView(responseReceiptInfo);
+                FillContainerDataGridView(receiptCode);
                 flag = true;
             }
             return flag;
@@ -186,6 +198,7 @@ namespace check
             req.receiptCode = txtOrder.Text.Trim();
             req.prefCode = "Recinputeach";
             req.containerCodec = txtLpn.Text.Trim();
+            req.receivingCartId = txtCarNo.Text.Trim();
             List<ReceiptConfirmRequest.Item> items = new List<ReceiptConfirmRequest.Item>();
             ReceiptConfirmRequest.Item item = new ReceiptConfirmRequest.Item();
             item.itemCode = txtBarcode.Text.Trim();
@@ -226,6 +239,22 @@ namespace check
             return flag;
         }
 
+        public bool getCarInfo(string carNo)
+        {
+            bool flag = false;
+            receiptAPI api = new receiptAPI(loginUser.server);
+            ResponseMessage<ReceivingCar> r = api.receivingCart("receipt/receivingCart", carNo);
+            if (r != null && r.code == "0")
+            {
+                if (r.data != null) {
+                    lblOrderNum.Text = r.data.receiptitemqty.ToString();
+                    lbllpnCount.Text = r.data.containercount.ToString();
+                    flag = true;
+                }
+            }
+            return flag;
+        }
+
         private void getItemName(string itemCode)
         {
             if (responseReceiptInfo != null && responseReceiptInfo.items.Count > 0)
@@ -251,7 +280,7 @@ namespace check
             if (rspinfo != null && rspinfo.items.Count > 0)
             {
                 DataTable dt = new DataTable();
-                string[] columns = new string[] { "receiptCode", "itemCode", "itemName", "totalQty", "openQty" };
+                string[] columns = new string[] { "单号", "编码", "名称", "总数", "待收" };
                 foreach (string s in columns)
                 {
                     dt.Columns.Add(s);
@@ -260,15 +289,50 @@ namespace check
                 foreach (Item o in responseReceiptInfo.items)
                 {
                     DataRow dr = dt.NewRow();
-                    dr["receiptCode"] = rspinfo.receiptCode;
-                    dr["itemCode"] = o.itemCode;
-                    dr["itemName"] = o.itemName;
-                    dr["totalQty"] = o.totalQty;
-                    dr["openQty"] = o.openQty;
+                    dr["单号"] = rspinfo.receiptCode;
+                    dr["编码"] = o.itemCode;
+                    dr["名称"] = o.itemName;
+                    dr["总数"] = o.totalQty;
+                    dr["待收"] = o.openQty;
                     dt.Rows.Add(dr);
                 }
 
                 dataGridView1.DataSource = dt;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rspinfo"></param>
+        private void FillContainerDataGridView(string receiptCode)
+        {
+            receiptAPI api = new receiptAPI(loginUser.server);
+           ResponseMessage<List<ContainerInfo>>  rspinfo=  api.queryRecontainer("receipt/containercode", receiptCode);
+
+            if (rspinfo != null && rspinfo.data.Count>0)
+            {
+                DataTable dt = new DataTable();
+                string[] columns = new string[] {  "容器", "编码", "名称","数量","库位","状态","车号" };
+                foreach (string s in columns)
+                {
+                    dt.Columns.Add(s);
+                }
+
+                foreach (ContainerInfo o in rspinfo.data)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["容器"] = o.containerCode;
+                    dr["编码"] = o.itemCode;
+                    dr["名称"] = o.itemName;
+                    dr["数量"] = o.quantity;
+                    dr["库位"] = o.toLocation;
+                    dr["状态"] = o.status;
+                    dr["车号"] = o.receivingCartId;
+                    dt.Rows.Add(dr);
+                }
+
+                dataGridView2.DataSource = dt;
             }
         }
     }

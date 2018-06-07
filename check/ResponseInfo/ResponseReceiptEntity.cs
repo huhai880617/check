@@ -18,7 +18,7 @@ namespace check
 
     public class ResponseReceiptInfo
     {
-        // public int id;
+        public int id;
         public string receiptCode;
         public string warehouseCode;
         public string companyCode;
@@ -37,7 +37,7 @@ namespace check
 
     public class Item
     {
-      //  public int id;
+        public int id;
         public string itemCode;
         public List<string> barcodes;
         public string itemName;

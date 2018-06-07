@@ -40,5 +40,30 @@ namespace check
             ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
             return rsp;
         }
+
+        public ResponseMessage<ReceivingCar> receivingCart(string methed, string carNo)
+        {
+           
+            string url = string.Format("{0}{1}/{2}?receivingCart={3}", server, controllerName, methed,carNo);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseMessage<ReceivingCar> rsp = JsonToolEx.ToObject<ResponseMessage<ReceivingCar>>(str);
+            return rsp;
+        }
+
+        public ResponseMessage<List< ContainerInfo>> queryRecontainer(string methed, string receiptCode)
+        {
+            string url = string.Format("{0}{1}/{2}?receiptCode={3}", server, controllerName, methed, receiptCode);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseMessage<List<ContainerInfo>> rsp = JsonToolEx.ToObject<ResponseMessage<List<ContainerInfo>>>(str);
+            return rsp;
+        }
+
+        public ResponseEntity closeReceipt(string methed, int receiptId)
+        {
+            string url = string.Format("{0}{1}/{2}?closeReceipt={3}", server, controllerName, methed, receiptId);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
+            return rsp;
+        }
     }
 }

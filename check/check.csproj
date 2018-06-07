@@ -153,6 +153,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="COMMON\WebAPIHelper.cs" />
+    <Compile Include="ResponseInfo\ResponseContainerEntity.cs" />
+    <Compile Include="ResponseInfo\ResponseReceivingCarEntity.cs" />
     <Compile Include="ResponseInfo\ResponseMessage.cs" />
     <Compile Include="ResponseInfo\ResponseReceiptEntity.cs" />
     <Compile Include="ResponseInfo\ResponseWarehouseEntity.cs" />
