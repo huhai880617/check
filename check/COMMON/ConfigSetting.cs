@@ -98,7 +98,7 @@ namespace check
             IniFile cfg = new IniFile(_iniFile);
             if (cfg != null)
             {
-                cfg.IniWriteValue("Configuration", "url", Server);
+                cfg.IniWriteValue("Configuration", "server", Server);
                 cfg.IniWriteValue("Configuration", "user", User);
                 cfg.IniWriteValue("Configuration", "warehouse", Warehouse);
             }

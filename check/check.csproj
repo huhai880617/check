@@ -120,6 +120,7 @@
     <Compile Include="API\receiptAPI.cs" />
     <Compile Include="API\loginAPI.cs" />
     <Compile Include="COMMON\CEncoder.cs" />
+    <Compile Include="COMMON\PlayMusic.cs" />
     <Compile Include="COMMON\MConfigSetting.cs" />
     <Compile Include="COMMON\DBConnect.cs" />
     <Compile Include="COMMON\Computer.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -206,6 +208,10 @@
     <Content Include="dll\Devart.Data.Vs.dll" />
     <Content Include="dll\Devart.Data.xml" />
     <Content Include="dll\libmysql.dll" />
+    <None Include="vidio\open.wav" />
+    <None Include="vidio\finish.wav" />
+    <None Include="vidio\error.wav" />
+    <None Include="vidio\ding.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

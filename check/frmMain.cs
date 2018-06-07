@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace check
 {
@@ -110,8 +111,13 @@ namespace check
                             {
                                 if (getCarInfo(textbox.Text.Trim()) == true)
                                 {
+                                    PlayMusic.playDing();
                                     textbox.Enabled = false;
                                     txtOrder.Focus();
+                                }
+                                else
+                                {
+                                    PlayMusic.playError();
                                 }
                                 break;
                             }
@@ -119,29 +125,51 @@ namespace check
                             {
                                 if (getOrderInfo(textbox.Text, prefCode) == true)
                                 {
+                                    PlayMusic.playOpen();
                                     txtLpn.Focus();
+                                }
+                                else
+                                {
+                                    PlayMusic.playError();
                                 }
                                 break;
                             }
                         case "txtLpn":
                             {
                                 if (rdoEach.Checked) { txtSN.Text = txtLpn.Text; }
-                               if( checkContainer(textbox.Text.Trim())==true)
+                                if (checkContainer(textbox.Text.Trim()) == true)
+                                {
                                     txtBarcode.Focus();
+                                    PlayMusic.playDing();
+                                }
+                                else
+                                {
+                                    PlayMusic.playError();
+                                }
                                 break;
                             }
                         case "txtBarcode":
                             {
                                 getItemName(textbox.Text.Trim());
                                 txtBarcodeCount.Text = "1";
-                                txtBarcodeCount.Focus();
+                                if (confirm() == true)
+                                {
+                                    PlayMusic.playFinish();
+                                }
+                                else
+                                {
+                                    PlayMusic.playError();
+                                };
+                                FillContainerDataGridView(txtOrder.Text.Trim());
+                                
+                                // txtBarcodeCount.Focus();
                                 break;
                             }
                         case "txtBarcodeCount":
                             {
                                // txtBarcodeCount.Text = "1";
-                                confirm();
-                                FillContainerDataGridView(txtOrder.Text.Trim());
+                                //confirm();
+                                //FillContainerDataGridView(txtOrder.Text.Trim());
                                 break;
                             }
                         case "txtSN":
@@ -232,7 +260,8 @@ namespace check
             ResponseEntity r = api.checkReceiptContainer("receipt/container", containerCodec);
             if (r != null && r.code != "0")
             {
-                Msg.ShowInformation(string.Format("货箱条码:{0} 验证失败", containerCodec));
+                richTextBox1.ForeColor = Color.Red;
+                richTextBox1.Text=(string.Format("货箱条码:{0} 验证失败", containerCodec));
 
             }
             if (r != null && r.code == "0") flag = true;
@@ -263,6 +292,7 @@ namespace check
                 {
                     if (i.itemCode == itemCode)
                     {
+                        richTextBox1.ForeColor = Color.Black;
                         richTextBox1.Text = i.itemName;
                         inventorySts = i.inventorySts;
                     }
