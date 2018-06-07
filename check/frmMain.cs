@@ -214,7 +214,7 @@ namespace check
             ResponseEntity r = api.confirmReceipt("confirm", req);
             if (r != null && r.code == "0")
             {
-                Msg.ShowInformation(string.Format("收货成功,商品编码:{0},数量:{1}", item.itemCode, item.qty));
+               // Msg.ShowInformation(string.Format("收货成功,商品编码:{0},数量:{1}", item.itemCode, item.qty));
                 getOrderInfo(req.receiptCode, req.prefCode);
                 flag = true;
             }
