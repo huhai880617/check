@@ -11,7 +11,7 @@ namespace check
         public string receiptCode;
         public string prefCode;
         public string containerCodec;
-        public string receivingCartId;
+        //public string receivingCartId;
         public List<ReceiptConfirmRequest.Item> items;
         
 

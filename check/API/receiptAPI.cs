@@ -65,5 +65,29 @@ namespace check
             ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
             return rsp;
         }
+
+        public ResponseEntity loacte(string methed, int containerId)
+        {
+            string url = string.Format("{0}{1}/{2}?containerId={3}", server, controllerName, methed, containerId);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
+            return rsp;
+        }
+
+        public ResponseEntity unloacte(string methed, int containerId)
+        {
+            string url = string.Format("{0}{1}/{2}?containerId={3}", server, controllerName, methed, containerId);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
+            return rsp;
+        }
+
+        public ResponseEntity cancelCheck(string methed, int containerId)
+        {
+            string url = string.Format("{0}{1}/{2}?containerId={3}", server, controllerName, methed, containerId);
+            string str = TTX_WebAPI_Helper.getReturnJson(url);
+            ResponseEntity rsp = JsonToolEx.ToObject<ResponseEntity>(str);
+            return rsp;
+        }
     }
 }

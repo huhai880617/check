@@ -14,7 +14,7 @@ namespace check
     public partial class frmLogincs : Form
     {
         private ResponseWarehouseEntity rsm;
-        private ConfigSetting cfg;
+        public static ConfigSetting cfg;
        // public string controllApi = @"/rf/login/warehouse";
         public frmLogincs()
         {
@@ -44,41 +44,22 @@ namespace check
 
         public void getDefaultWarehouseInfo(string user)
         {
-            try
-            {
-                string sql = string.Format("select s.defaultWarehouseCode as 'code',s.defaultWarehouseName as 'name'  from user_settings s where s.Code='{0}' ;", user);
-                cbxWarehouse.DataSource = null;
-                DataTable dt2 = DBConnect.GetDataSet(sql);
-                cbxWarehouse.DataSource = dt2;
-                cbxWarehouse.DisplayMember = "name";
-                cbxWarehouse.ValueMember = "code";
-            }
-            catch (Exception ex)
-            {
-                LogExecute.WriteExceptionLog("getDefaultWarehouseInfo", ex);
-            }
+            //try
+            //{
+            //    string sql = string.Format("select s.defaultWarehouseCode as 'code',s.defaultWarehouseName as 'name'  from user_settings s where s.Code='{0}' ;", user);
+            //    cbxWarehouse.DataSource = null;
+            //    DataTable dt2 = DBConnect.GetDataSet(sql);
+            //    cbxWarehouse.DataSource = dt2;
+            //    cbxWarehouse.DisplayMember = "name";
+            //    cbxWarehouse.ValueMember = "code";
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogExecute.WriteExceptionLog("getDefaultWarehouseInfo", ex);
+            //}
         }
 
-        public void getWarehouseInfo(string user)
-        {
-            try
-            {
-                string sql = string.Format("select count(0)  from ttx_user s where s.code='{0}'", user);
-                if (DBConnect.GetDataSet(sql).Rows[0][0].ToString() != "0")
-                {
-                    sql = string.Format(" select w.`code`,w.`name` from ttx_data_right r INNER JOIN warehouse w on r.`value`= w.`code` where r.`user`= '{0}' and r.tid = 'warehouse';", user);
-                    cbxWarehouse.DataSource = null;
-                    DataTable dt = DBConnect.GetDataSet(sql);
-                    cbxWarehouse.DataSource = dt;
-                    cbxWarehouse.DisplayMember = "name";
-                    cbxWarehouse.ValueMember = "code";
-
-                }
-            }
-            catch (Exception ex) {
-                LogExecute.WriteExceptionLog("getWarehouseInfo", ex);
-            }
-        }
+       
 
         private void txtUser_Leave(object sender, EventArgs e)
         {
@@ -104,28 +85,7 @@ namespace check
             //cbxWarehouse_Init();
         }
 
-        private void cbxWarehouse_Init()
-        {
-            try
-            {
-                string user = txtUser.Text.Trim();
-                if (user != "")
-                {
-                    if (chkLoginDefault.Checked)
-                    {
-                        getDefaultWarehouseInfo(user);
-                    }
-                    else
-                    {
-                        getWarehouseInfo(user);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Msg.ShowException(ex);
-            }
-        }
+      
 
         private bool Valid_Input()
         {
@@ -155,7 +115,7 @@ namespace check
             //string password = CEncoder.Encode(pwd);
             string password = CEncoder.encryptMD5(pwd);
             string sql = string.Format("select count(0) from ttx_user_password where code='{0}' and password ='{1}' ", user, password);
-            if (DBConnect.GetDataSet(sql).Rows[0][0].ToString() != "")
+            //if (DBConnect.GetDataSet(sql).Rows[0][0].ToString() != "")
             {
                 loginUser.user = user;
                 loginUser.warehouseCode = warehouseCode;
@@ -165,7 +125,7 @@ namespace check
                 TTX_WebAPI_Helper.user = loginUser.user;
                 return true;
             }
-            return false;
+           // return false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace check
 {
     public partial class frmSetting : Form
     {
-        ConfigSetting cfg;
+       
         MConfigSetting mcfg;
         public frmSetting()
         {
@@ -25,8 +25,8 @@ namespace check
         {
             // 服务器参数
             string file = Path.Combine(Application.StartupPath, "config\\config.ini");
-            cfg = new ConfigSetting(file);
-            txtUrl.Text = cfg.Server;
+           frmLogincs.cfg = new ConfigSetting(file);
+            txtUrl.Text = frmLogincs.cfg.Server;
 
             // 入库首选项Map
             file = Path.Combine(Application.StartupPath, "config\\mconfig.ini");
@@ -40,18 +40,19 @@ namespace check
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string strPre = cfg.Server;
+            string strPre = frmLogincs.cfg.Server;
             string strCur= txtUrl.Text.Trim();
-            cfg.Server = strCur;
-            cfg.Write();
-            cfg.Read();
-            if (cfg.Server == strCur)
+            frmLogincs.cfg.Server = strCur;
+            frmLogincs.cfg.Write();
+            frmLogincs.cfg.Read();
+            if (frmLogincs.cfg.Server == strCur)
             {
                 Msg.ShowInformation(String.Format("保存成功!!! 由原来的{0} 修改成{1}", strPre, strCur));
             }
             else
             {
                 Msg.Warning("保存失败!!!");
+                frmLogincs.cfg.Server = strPre;
             }
         }
 
