@@ -25,6 +25,7 @@ namespace check
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Proxy = null;
                 request.Method = "GET";
                // request.Accept = "text/html, application/xhtml+xml, */*";
                 request.ContentType = "application/json";
@@ -109,7 +110,7 @@ namespace check
         public static string postReturnJson(string url, string body)
         {
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-
+            httpWebRequest.Proxy = null;
             httpWebRequest.ContentType = "application/json" ;
             httpWebRequest.Method = "POST";
            // httpWebRequest.Timeout = 20000;

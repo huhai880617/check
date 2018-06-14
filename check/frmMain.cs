@@ -17,7 +17,7 @@ namespace check
         {
             InitializeComponent();
             Data_Init();
-            this.Text = string.Format("ANNTO WMS 工作登记台 Ver1.1.3-180608");
+            this.Text = string.Format("ANNTO WMS 工作登记台 Ver1.1.6-180614");
         }
 
         private void Data_Init()
@@ -87,6 +87,11 @@ namespace check
             if (dataGridView2.SelectedRows != null && dataGridView2.SelectedRows.Count == 1)
             {
                 int containerId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                if (containerId == 111)
+                {
+                    Msg.ShowInformation("失败！刷新后重试！");
+                    return;
+                }
                 ResponseEntity rsp = api.cancelCheck("receipt/cancelCheck", containerId);
                 if (rsp != null && rsp.code == "0")
                 {
@@ -124,6 +129,11 @@ namespace check
             if (dataGridView2.SelectedRows != null && dataGridView2.SelectedRows.Count == 1)
             {
                 int containerId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                if (containerId == 111)
+                {
+                    Msg.ShowInformation("失败！刷新后重试！");
+                    return;
+                }
                 ResponseEntity rsp = api.cancelCheck("receipt/locate", containerId);
                 if (rsp != null && rsp.code == "0")
                 {
@@ -149,6 +159,11 @@ namespace check
             if (dataGridView2.SelectedRows != null && dataGridView2.SelectedRows.Count == 1)
             {
                 int containerId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
+                if (containerId == 111)
+                {
+                    Msg.ShowInformation("失败！刷新后重试！");
+                    return;
+                }
                 ResponseEntity rsp = api.cancelCheck("receipt/unlocate", containerId);
                 if (rsp != null && rsp.code == "0")
                 {
@@ -208,6 +223,7 @@ namespace check
                             }
                         case "txtOrder":
                             {
+                    
                                 if (getOrderInfo(textbox.Text, prefCode) == true)
                                 {
                                     PlayMusic.playOpen();
@@ -221,12 +237,15 @@ namespace check
                             }
                         case "txtLpn":
                             {
+                                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                                sw.Start();
+                                String temp = txtBarcode.Text;
+                                String sntemp = txtLpn.Text;
                                 if (rdoEach.Checked) { txtSN.Text = txtLpn.Text; }
                                 if (checkContainer(textbox.Text.Trim()) == true)
                                 {
                                     if (confirm() == true)
                                     {
-                                       
                                         PlayMusic.playFinish();
                                         txtLpn.Text = "";
                                         txtBarcode.Text = "";
@@ -241,8 +260,93 @@ namespace check
                                             txtOrder.Focus();
                                         }
                                         lblRemainNum.Text = (int.Parse(lblRemainNum.Text) - 1).ToString();
+                                       
 
-                                        RefreshData();
+                                        DataTable temp1 = (DataTable)dataGridView1.DataSource;
+                                        DataTable temp2 = (DataTable)dataGridView2.DataSource;
+                                        DataTable dt1 = new DataTable();
+                                        DataTable dt2 = new DataTable();
+                                        string[] columns2 = new string[] { "标识", "容器", "编码", "名称", "数量", "库位", "状态", "车号" };
+                                        foreach (string s in columns2)
+                                        {
+                                            dt2.Columns.Add(s);
+                                        }
+                                        if (temp2 != null)
+                                        {
+                                            foreach (DataRow item in temp2.Rows)
+                                            {
+                                                DataRow aDataRow = dt2.NewRow();
+                                                aDataRow.ItemArray = item.ItemArray;
+                                                dt2.Rows.Add(aDataRow);
+                                            }
+                                        }
+
+                                        string[] columns = new string[] { "单号", "编码", "名称", "总数", "待收" };
+                                        foreach (string s in columns)
+                                        {
+                                            dt1.Columns.Add(s);
+                                        }
+
+                                        bool flag = false;
+                                        foreach (DataRow item in temp1.Rows)
+                                        {
+
+                                            if (item["编码"].ToString() == temp)
+                                            {
+                                                if (flag)
+                                                {
+                                                    DataRow newRow1 = dt1.NewRow();
+                                                    newRow1["单号"] = item["单号"];
+                                                    newRow1["编码"] = item["编码"];
+                                                    newRow1["名称"] = item["名称"];
+                                                    newRow1["总数"] = item["总数"];
+                                                    newRow1["待收"] = item["待收"];
+                                                    dt1.Rows.Add(newRow1);
+                                                    continue;
+                                                }
+                                                int a = Convert.ToInt32(item["待收"]) - 1;
+                                                item["待收"] = Convert.ToInt32(item["待收"]) - 1;
+                                                //dt1.Rows.Add(item);
+                                                DataRow newRow2 = dt2.NewRow();
+                                                newRow2["标识"] = 111;
+                                                newRow2["容器"] = sntemp;
+                                                newRow2["编码"] = item["编码"];
+                                                newRow2["名称"] = item["名称"];
+                                                newRow2["数量"] = 1;
+                                                newRow2["库位"] = "刷新查看";
+                                                newRow2["状态"] = 300;
+                                                newRow2["车号"] = txtCarNo.Text;
+                                                dt2.Rows.Add(newRow2);
+                                                if (a != 0)
+                                                {
+                                                    DataRow newRow1 = dt1.NewRow();
+                                                    newRow1["单号"] = item["单号"];
+                                                    newRow1["编码"] = item["编码"];
+                                                    newRow1["名称"] = item["名称"];
+                                                    newRow1["总数"] = item["总数"];
+                                                    newRow1["待收"] = item["待收"];
+                                                    dt1.Rows.Add(newRow1);
+                                                }
+                                                flag = true;
+                                            }
+                                            else {
+                                                DataRow newRow1 = dt1.NewRow();
+                                                newRow1["单号"] = item["单号"];
+                                                newRow1["编码"] = item["编码"];
+                                                newRow1["名称"] = item["名称"];
+                                                newRow1["总数"] = item["总数"];
+                                                newRow1["待收"] = item["待收"];
+                                                dt1.Rows.Add(newRow1);
+                                            }
+                                            
+                                        }
+                                        temp1.Rows.Clear();
+                                        temp2?.Rows.Clear();
+                                        dataGridView1.DataSource = null;
+                                        dataGridView2.DataSource = null;
+                                        dataGridView1.DataSource = dt1;
+                                        dataGridView2.DataSource = dt2;                          
+
                                     }
                                     else
                                     {
@@ -258,6 +362,9 @@ namespace check
                                     txtSN.Text = "";
                                     txtLpn.Focus();
                                 }
+                                sw.Stop();
+                                TimeSpan ts2 = sw.Elapsed;
+                                LogExecute.WriteInfoLog(string.Format("收货确认请求时长：{0}---",ts2.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
                                 break;
                             }
                         case "txtBarcode":
@@ -316,6 +423,8 @@ namespace check
         /// <param name="PrefCode">入库首选项</param>
         private bool getOrderInfo(string receiptCode, string PrefCode)
         {
+            System.Diagnostics.Stopwatch sw1 = new System.Diagnostics.Stopwatch();
+            sw1.Start();
             bool flag = false;
             string name = @"/receipt";
             string url = string.Format("{0}{1}{2}?receiptCode={3}&prefCode={4}", loginUser.server, controlReceiptApi, name, receiptCode, PrefCode);
@@ -323,23 +432,32 @@ namespace check
             ResponseReceiptEntity rsp = JsonToolEx.ToObject<ResponseReceiptEntity>(Rstr);
             //Root rs = JsonToolEx.ToObject<Root>(Rstr);
             // 获取待收货数量  总数量   SKU数量
+
             if (rsp.code == "0" && rsp.data != null)
             {
+                if (dataGridView1.Rows.Count == 0)
+                {
+                    lblCountNum.Text = rsp.data.totalQty.ToString(); //货品总件数
+                    lblSKUCount.Text = rsp.data.itemQty.ToString(); //货品总数
+                }
                 lblRemainNum.Text = rsp.data.openQty.ToString(); //货品待收货数量
-                lblCountNum.Text = rsp.data.totalQty.ToString(); //货品总件数
-                lblSKUCount.Text = rsp.data.itemQty.ToString(); //货品总数
-               
+                sw1.Stop();
+                TimeSpan ts1 = sw1.Elapsed;
+                LogExecute.WriteInfoLog(string.Format("订单请求耗时-{0}---！",ts1.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
                 responseReceiptInfo = rsp.data;
                 FillReciptDataGridView(responseReceiptInfo);
                 FillContainerDataGridView(responseReceiptInfo.receiptCode);
                 flag = true;
             }
+
             return flag;
         }
 
         // 收货
         private bool confirm()
         {
+            System.Diagnostics.Stopwatch sw3 = new System.Diagnostics.Stopwatch();
+            sw3.Start();
             bool flag = false;
             ReceiptConfirmRequest req = new ReceiptConfirmRequest();
             req.receiptCode = txtOrder.Text.Trim();
@@ -362,8 +480,8 @@ namespace check
             if (r != null && r.code == "0")
             {
                // Msg.ShowInformation(string.Format("收货成功,商品编码:{0},数量:{1}", item.itemCode, item.qty));
-                getOrderInfo(req.receiptCode, req.prefCode);
-                FillReciptDataGridView(responseReceiptInfo);
+               // getOrderInfo(req.receiptCode, req.prefCode);
+               // FillReciptDataGridView(responseReceiptInfo);
                 flag = true;
                 lblOrderNum.Text = (int.Parse(lblOrderNum.Text) + 1).ToString();
                 lbllpnCount.Text = (int.Parse(lbllpnCount.Text) + 1).ToString();
@@ -373,11 +491,16 @@ namespace check
                 richTextBox1.ForeColor = Color.Red;
                 richTextBox1.Text = (string.Format("收货失败,商品编码:{0}--:{1}", item.itemCode, r.msg));
             }
+            sw3.Stop();
+            TimeSpan ts2 = sw3.Elapsed;
+            LogExecute.WriteInfoLog(string.Format("收货确认请求耗时--{0}---", ts2.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
             return flag;
         }
 
         private bool checkContainer(string containerCodec)
         {
+            System.Diagnostics.Stopwatch sw3 = new System.Diagnostics.Stopwatch();
+            sw3.Start();
             bool flag=false;
             receiptAPI api = new receiptAPI(loginUser.server);
             ResponseEntity r = api.checkReceiptContainer("receipt/container", containerCodec);
@@ -388,11 +511,16 @@ namespace check
 
             }
             if (r != null && r.code == "0") flag = true;
+            sw3.Stop();
+            TimeSpan ts2 = sw3.Elapsed;
+            LogExecute.WriteInfoLog(string.Format("验证货箱请求耗时--{0}---", ts2.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
             return flag;
         }
 
         public bool getCarInfo(string carNo)
         {
+            System.Diagnostics.Stopwatch sw3 = new System.Diagnostics.Stopwatch();
+            sw3.Start();
             bool flag = false;
             receiptAPI api = new receiptAPI(loginUser.server);
             ResponseMessage<ReceivingCar> r = api.receivingCart("receipt/receivingCart", carNo);
@@ -404,6 +532,9 @@ namespace check
                     flag = true;
                 }
             }
+            sw3.Stop();
+            TimeSpan ts2 = sw3.Elapsed;
+            LogExecute.WriteInfoLog(string.Format("请求车号耗时--{0}---", ts2.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
             return flag;
         }
 
@@ -460,6 +591,8 @@ namespace check
         /// <param name="rspinfo"></param>
         private void FillContainerDataGridView(string receiptCode)
         {
+            System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
+            sw2.Start();
             receiptAPI api = new receiptAPI(loginUser.server);
             ResponseMessage<List<ContainerInfo>>  rspinfo=  api.queryRecontainer("receipt/containercode", receiptCode);
             dataGridView2.DataSource = null;
@@ -487,6 +620,9 @@ namespace check
                 }
                 dataGridView2.DataSource = dt;
             }
+            sw2.Stop();
+            TimeSpan ts2 = sw2.Elapsed;
+            LogExecute.WriteInfoLog(string.Format("已收货货箱请求耗时--{0}---",ts2.TotalMilliseconds) + this.txtOrder.Text + "--" + this.txtLpn.Text);
         }
 
         private void txtCarNo_TextChanged(object sender, EventArgs e)

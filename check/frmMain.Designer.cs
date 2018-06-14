@@ -48,6 +48,8 @@
             this.btnFinish = new System.Windows.Forms.Button();
             this.txtCarNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCloseContainer = new System.Windows.Forms.Button();
+            this.txtSN = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblSKUCount = new System.Windows.Forms.Label();
@@ -57,13 +59,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnCloseOrder = new System.Windows.Forms.Button();
-            this.btnCloseContainer = new System.Windows.Forms.Button();
-            this.rdoWay = new System.Windows.Forms.Panel();
-            this.rdoBatch = new System.Windows.Forms.RadioButton();
-            this.rdoMix = new System.Windows.Forms.RadioButton();
-            this.rdoEach = new System.Windows.Forms.RadioButton();
             this.txtBarcodeCount = new System.Windows.Forms.TextBox();
-            this.txtSN = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtLpn = new System.Windows.Forms.TextBox();
@@ -81,7 +78,10 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.rdoWay = new System.Windows.Forms.Panel();
+            this.rdoBatch = new System.Windows.Forms.RadioButton();
+            this.rdoMix = new System.Windows.Forms.RadioButton();
+            this.rdoEach = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -94,7 +94,6 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.rdoWay.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -103,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.rdoWay.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -246,6 +246,8 @@
             this.panel2.Controls.Add(this.btnFinish);
             this.panel2.Controls.Add(this.txtCarNo);
             this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btnCloseContainer);
+            this.panel2.Controls.Add(this.txtSN);
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Location = new System.Drawing.Point(8, 7);
             this.panel2.Name = "panel2";
@@ -325,15 +327,39 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "车号：";
             // 
+            // btnCloseContainer
+            // 
+            this.btnCloseContainer.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCloseContainer.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCloseContainer.Location = new System.Drawing.Point(630, 3);
+            this.btnCloseContainer.Name = "btnCloseContainer";
+            this.btnCloseContainer.Size = new System.Drawing.Size(86, 49);
+            this.btnCloseContainer.TabIndex = 5;
+            this.btnCloseContainer.Text = "完成容器";
+            this.btnCloseContainer.UseVisualStyleBackColor = true;
+            this.btnCloseContainer.Visible = false;
+            this.btnCloseContainer.Click += new System.EventHandler(this.btnCloseContainer_Click);
+            // 
+            // txtSN
+            // 
+            this.txtSN.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtSN.Location = new System.Drawing.Point(845, 8);
+            this.txtSN.Name = "txtSN";
+            this.txtSN.Size = new System.Drawing.Size(229, 26);
+            this.txtSN.TabIndex = 6;
+            this.txtSN.Text = "0123345679";
+            this.txtSN.Visible = false;
+            this.txtSN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox1.Location = new System.Drawing.Point(853, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(853, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(485, 159);
+            this.richTextBox1.Size = new System.Drawing.Size(485, 160);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "测试文本";
             // 
@@ -350,9 +376,7 @@
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.btnCloseOrder);
-            this.panel4.Controls.Add(this.btnCloseContainer);
             this.panel4.Controls.Add(this.txtBarcodeCount);
-            this.panel4.Controls.Add(this.txtSN);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.txtBarcode);
             this.panel4.Controls.Add(this.label8);
@@ -438,68 +462,6 @@
             this.btnCloseOrder.UseVisualStyleBackColor = true;
             this.btnCloseOrder.Click += new System.EventHandler(this.btnCloseOrder_Click);
             // 
-            // btnCloseContainer
-            // 
-            this.btnCloseContainer.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCloseContainer.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCloseContainer.Location = new System.Drawing.Point(642, 6);
-            this.btnCloseContainer.Name = "btnCloseContainer";
-            this.btnCloseContainer.Size = new System.Drawing.Size(86, 49);
-            this.btnCloseContainer.TabIndex = 5;
-            this.btnCloseContainer.Text = "完成容器";
-            this.btnCloseContainer.UseVisualStyleBackColor = true;
-            this.btnCloseContainer.Visible = false;
-            this.btnCloseContainer.Click += new System.EventHandler(this.btnCloseContainer_Click);
-            // 
-            // rdoWay
-            // 
-            this.rdoWay.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rdoWay.Controls.Add(this.rdoBatch);
-            this.rdoWay.Controls.Add(this.rdoMix);
-            this.rdoWay.Controls.Add(this.rdoEach);
-            this.rdoWay.Location = new System.Drawing.Point(380, 3);
-            this.rdoWay.Name = "rdoWay";
-            this.rdoWay.Size = new System.Drawing.Size(179, 110);
-            this.rdoWay.TabIndex = 14;
-            this.rdoWay.Visible = false;
-            // 
-            // rdoBatch
-            // 
-            this.rdoBatch.AutoSize = true;
-            this.rdoBatch.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rdoBatch.Location = new System.Drawing.Point(15, 74);
-            this.rdoBatch.Name = "rdoBatch";
-            this.rdoBatch.Size = new System.Drawing.Size(94, 20);
-            this.rdoBatch.TabIndex = 2;
-            this.rdoBatch.TabStop = true;
-            this.rdoBatch.Text = "批量混箱";
-            this.rdoBatch.UseVisualStyleBackColor = true;
-            // 
-            // rdoMix
-            // 
-            this.rdoMix.AutoSize = true;
-            this.rdoMix.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rdoMix.Location = new System.Drawing.Point(15, 42);
-            this.rdoMix.Name = "rdoMix";
-            this.rdoMix.Size = new System.Drawing.Size(94, 20);
-            this.rdoMix.TabIndex = 1;
-            this.rdoMix.TabStop = true;
-            this.rdoMix.Text = "逐件混箱";
-            this.rdoMix.UseVisualStyleBackColor = true;
-            // 
-            // rdoEach
-            // 
-            this.rdoEach.AutoSize = true;
-            this.rdoEach.Checked = true;
-            this.rdoEach.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rdoEach.Location = new System.Drawing.Point(15, 9);
-            this.rdoEach.Name = "rdoEach";
-            this.rdoEach.Size = new System.Drawing.Size(94, 20);
-            this.rdoEach.TabIndex = 0;
-            this.rdoEach.TabStop = true;
-            this.rdoEach.Text = "逐件分箱";
-            this.rdoEach.UseVisualStyleBackColor = true;
-            // 
             // txtBarcodeCount
             // 
             this.txtBarcodeCount.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -509,16 +471,15 @@
             this.txtBarcodeCount.TabIndex = 5;
             this.txtBarcodeCount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
             // 
-            // txtSN
+            // label9
             // 
-            this.txtSN.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtSN.Location = new System.Drawing.Point(596, 127);
-            this.txtSN.Name = "txtSN";
-            this.txtSN.Size = new System.Drawing.Size(229, 26);
-            this.txtSN.TabIndex = 6;
-            this.txtSN.Text = "0123345679";
-            this.txtSN.Visible = false;
-            this.txtSN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCarNo_KeyDown);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(52, 83);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 16);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "SN：";
             // 
             // txtBarcode
             // 
@@ -734,15 +695,54 @@
             this.label13.Text = "已收";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // rdoWay
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(52, 83);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 16);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "SN：";
+            this.rdoWay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rdoWay.Controls.Add(this.rdoBatch);
+            this.rdoWay.Controls.Add(this.rdoMix);
+            this.rdoWay.Controls.Add(this.rdoEach);
+            this.rdoWay.Location = new System.Drawing.Point(380, 3);
+            this.rdoWay.Name = "rdoWay";
+            this.rdoWay.Size = new System.Drawing.Size(179, 110);
+            this.rdoWay.TabIndex = 14;
+            this.rdoWay.Visible = false;
+            // 
+            // rdoBatch
+            // 
+            this.rdoBatch.AutoSize = true;
+            this.rdoBatch.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rdoBatch.Location = new System.Drawing.Point(15, 74);
+            this.rdoBatch.Name = "rdoBatch";
+            this.rdoBatch.Size = new System.Drawing.Size(94, 20);
+            this.rdoBatch.TabIndex = 2;
+            this.rdoBatch.TabStop = true;
+            this.rdoBatch.Text = "批量混箱";
+            this.rdoBatch.UseVisualStyleBackColor = true;
+            // 
+            // rdoMix
+            // 
+            this.rdoMix.AutoSize = true;
+            this.rdoMix.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rdoMix.Location = new System.Drawing.Point(15, 42);
+            this.rdoMix.Name = "rdoMix";
+            this.rdoMix.Size = new System.Drawing.Size(94, 20);
+            this.rdoMix.TabIndex = 1;
+            this.rdoMix.TabStop = true;
+            this.rdoMix.Text = "逐件混箱";
+            this.rdoMix.UseVisualStyleBackColor = true;
+            // 
+            // rdoEach
+            // 
+            this.rdoEach.AutoSize = true;
+            this.rdoEach.Checked = true;
+            this.rdoEach.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rdoEach.Location = new System.Drawing.Point(15, 9);
+            this.rdoEach.Name = "rdoEach";
+            this.rdoEach.Size = new System.Drawing.Size(94, 20);
+            this.rdoEach.TabIndex = 0;
+            this.rdoEach.TabStop = true;
+            this.rdoEach.Text = "逐件分箱";
+            this.rdoEach.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -770,8 +770,6 @@
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.rdoWay.ResumeLayout(false);
-            this.rdoWay.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -780,6 +778,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.rdoWay.ResumeLayout(false);
+            this.rdoWay.PerformLayout();
             this.ResumeLayout(false);
 
         }
