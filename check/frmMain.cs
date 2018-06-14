@@ -17,7 +17,7 @@ namespace check
         {
             InitializeComponent();
             Data_Init();
-            this.Text = string.Format("ANNTO WMS 工作登记台 Ver1.1.6-180614");
+            this.Text = string.Format("ANNTO WMS 工作登记台 Ver1.2.0-180614");
         }
 
         private void Data_Init()

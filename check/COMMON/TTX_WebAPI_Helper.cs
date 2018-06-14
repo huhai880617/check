@@ -21,11 +21,19 @@ namespace check
         public static string getReturnJson(string url)
         {
             StreamReader streamReader = null;
+            HttpWebRequest request = null ;
             string Rstring = "";
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request = (HttpWebRequest)WebRequest.Create(url);
+
+                request.KeepAlive = false;
+                request.ServicePoint.Expect100Continue = false;
+                request.ServicePoint.UseNagleAlgorithm = false;
+                request.ServicePoint.ConnectionLimit = int.MaxValue;
+                request.AllowWriteStreamBuffering = false;
                 request.Proxy = null;
+
                 request.Method = "GET";
                // request.Accept = "text/html, application/xhtml+xml, */*";
                 request.ContentType = "application/json";
@@ -39,8 +47,8 @@ namespace check
                // XmlDocument doc = new XmlDocument();
                 string s = streamReader.ReadToEnd();
                 streamReader.Close();
-                request.Abort();
                 response.Close();
+                request.Abort();
                 // doc.LoadXml(s);
                 //  Rstring = JsonConvert.SerializeXmlNode(doc);
                 Rstring = s;
@@ -49,6 +57,7 @@ namespace check
             {
                 LogExecute.WriteExceptionLog("GET", ex);
             }
+
             return Rstring;
 
         }
@@ -59,6 +68,14 @@ namespace check
             StreamReader streamReader = null;
             string Rstring = "";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            request.KeepAlive = false;
+            request.ServicePoint.Expect100Continue = false;
+            request.ServicePoint.UseNagleAlgorithm = false;
+            request.ServicePoint.ConnectionLimit = int.MaxValue;
+            request.AllowWriteStreamBuffering = false;
+            request.Proxy = null;
+
             request.Method = "POST";
            // request.Accept = "text/html, application/xhtml+xml, */*";
             request.ContentType = "application/json";
@@ -98,8 +115,10 @@ namespace check
            
             Rstring = streamReader.ReadToEnd();
             streamReader.Close();
-            request.Abort();
             response.Close();
+            request.Abort();
+
+
             return Rstring;
         }
 
@@ -109,29 +128,45 @@ namespace check
         //soap填写:"text/xml; charset=utf-8"
         public static string postReturnJson(string url, string body)
         {
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.Proxy = null;
-            httpWebRequest.ContentType = "application/json" ;
-            httpWebRequest.Method = "POST";
-           // httpWebRequest.Timeout = 20000;
-            WarehouseCode warehousecode = new WarehouseCode(warehouse);
-            httpWebRequest.Headers.Add("X-User", user);
-            httpWebRequest.Headers.Add("X-DB", db);
-            httpWebRequest.Headers.Add("x-params", JsonToolEx.ToJson(warehousecode));
+            HttpWebRequest request = null;
+            StreamReader streamReader = null;
+            string responseContent = "";
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(url);
 
-            byte[] btBodys = Encoding.UTF8.GetBytes(body);
-            httpWebRequest.ContentLength = btBodys.Length;
-            httpWebRequest.GetRequestStream().Write(btBodys, 0, btBodys.Length);
+                request.KeepAlive = false;
+                request.ServicePoint.Expect100Continue = false;
+                request.ServicePoint.UseNagleAlgorithm = false;
+                request.ServicePoint.ConnectionLimit = int.MaxValue;
+                request.AllowWriteStreamBuffering = false;
+                request.Proxy = null;
 
-            HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream());
-            string responseContent = streamReader.ReadToEnd();
+                request.ContentType = "application/json";
+                request.Method = "POST";
+                // request.Timeout = 20000;
+                WarehouseCode warehousecode = new WarehouseCode(warehouse);
+                request.Headers.Add("X-User", user);
+                request.Headers.Add("X-DB", db);
+                request.Headers.Add("x-params", JsonToolEx.ToJson(warehousecode));
 
-            httpWebResponse.Close();
-            streamReader.Close();
-            httpWebRequest.Abort();
-            httpWebResponse.Close();
+                byte[] btBodys = Encoding.UTF8.GetBytes(body);
+                request.ContentLength = btBodys.Length;
+                request.GetRequestStream().Write(btBodys, 0, btBodys.Length);
 
+                HttpWebResponse httpWebResponse = (HttpWebResponse)request.GetResponse();
+                streamReader = new StreamReader(httpWebResponse.GetResponseStream());
+                responseContent = streamReader.ReadToEnd();
+
+                httpWebResponse.Close();
+                streamReader.Close();
+                request.Abort();
+                httpWebResponse.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
             return responseContent;
         }
 
